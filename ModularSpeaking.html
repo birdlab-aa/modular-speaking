@@ -59,10 +59,11 @@
     .card-footer {
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
+      justify-content: flex-start;
       width: 100%;
       max-width: 400px;
       height: 100%;
+      padding-top: 60px;
     }
 
     .nav-row {
@@ -73,13 +74,13 @@
     }
 
     .nav-row.main-nav {
-      flex: 1;
-      justify-content: center;
+      flex: 0;
+      justify-content: flex-start;
     }
 
     .nav-row.bottom-nav {
       position: fixed;
-      bottom: 100px;
+      bottom: 70px;
       left: 50%;
       transform: translateX(-50%);
       width: 100%;
