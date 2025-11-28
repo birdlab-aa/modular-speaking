@@ -171,11 +171,23 @@ function renderCard() {
   const navRowBottom = document.createElement('div');
   navRowBottom.className = 'nav-row bottom-nav';
 
-  // Show Up button if not at root
+  // Show Top button if not at root (left side)
+  if (!currentNode.isRoot) {
+    const topBtn = document.createElement('button');
+    topBtn.className = 'nav-btn bottom-btn';
+    topBtn.textContent = 'Top';
+    topBtn.onclick = () => {
+      currentNode = rootNode;
+      renderCard();
+    };
+    navRowBottom.appendChild(topBtn);
+  }
+
+  // Show Up button if not at root (right side)
   if (!currentNode.isRoot) {
     const upBtn = document.createElement('button');
     upBtn.className = 'nav-btn bottom-btn';
-    upBtn.textContent = 'Upx';
+    upBtn.textContent = 'Up';
     upBtn.onclick = () => {
       if (currentNode.parent) {
         currentNode = currentNode.parent;
@@ -183,18 +195,6 @@ function renderCard() {
       }
     };
     navRowBottom.appendChild(upBtn);
-  }
-
-  // Show Top button if not at root
-  if (!currentNode.isRoot) {
-    const topBtn = document.createElement('button');
-    topBtn.className = 'nav-btn bottom-btn';
-    topBtn.textContent = 'Topx';
-    topBtn.onclick = () => {
-      currentNode = rootNode;
-      renderCard();
-    };
-    navRowBottom.appendChild(topBtn);
   }
 
   // Only add bottom nav if it has buttons
