@@ -151,16 +151,22 @@ function renderCard() {
       const btn = document.createElement('button');
       btn.className = 'nav-btn';
       btn.textContent = node.text;
-      btn.onclick = () => {
-        if (node.children.length > 0) {
-          // Navigate to this node's children
+
+      // Style differently if it's a leaf node (no children)
+      if (node.children.length === 0) {
+        // Leaf node - make it blend into background (not clickable looking)
+        btn.style.border = '1px solid #000';
+        btn.style.background = '#000';
+        btn.style.cursor = 'default';
+        btn.onclick = null; // No click action
+      } else {
+        // Has children - clickable
+        btn.onclick = () => {
           currentNode = node;
           renderCard();
-        } else {
-          // Leaf node - show message
-          showMessage(`"${node.text}" has no sub-items`);
-        }
-      };
+        };
+      }
+
       navRowMain.appendChild(btn);
     });
   }
