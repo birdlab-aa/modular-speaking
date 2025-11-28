@@ -360,20 +360,9 @@ function renderCard() {
     navRowTop.appendChild(btn);
   });
 
-  // Back / menu row
+  // Back / menu row (Top left, Up right)
   const navRowBottom = document.createElement("div");
   navRowBottom.className = "nav-row bottom-nav";
-
-  if (card.parent) {
-    const backParentBtn = document.createElement("button");
-    backParentBtn.className = "nav-btn bottom-btn";
-    backParentBtn.textContent = "Up";
-    backParentBtn.onclick = () => {
-      currentId = card.parent;
-      renderCard();
-    };
-    navRowBottom.appendChild(backParentBtn);
-  }
 
   if (card.id !== "menu") {
     const backMenuBtn = document.createElement("button");
@@ -384,6 +373,17 @@ function renderCard() {
       renderCard();
     };
     navRowBottom.appendChild(backMenuBtn);
+  }
+
+  if (card.parent) {
+    const backParentBtn = document.createElement("button");
+    backParentBtn.className = "nav-btn bottom-btn";
+    backParentBtn.textContent = "Up";
+    backParentBtn.onclick = () => {
+      currentId = card.parent;
+      renderCard();
+    };
+    navRowBottom.appendChild(backParentBtn);
   }
 
   footerEl.appendChild(navRowTop);
