@@ -341,42 +341,7 @@ function renderCard() {
   const cardEl = document.createElement("div");
   cardEl.className = "card";
 
-  // Calculate dynamic font size based on total content length
-  const totalChars = (card.title || "").length + 
-                     (card.lines || []).join("").length;
-  let fontSize;
-  if (totalChars < 80) {
-    fontSize = "1.4rem";
-  } else if (totalChars < 150) {
-    fontSize = "1.25rem";
-  } else if (totalChars < 250) {
-    fontSize = "1.1rem";
-  } else {
-    fontSize = "1rem";
-  }
-
-  // MAIN CONTENT
-  const mainEl = document.createElement("div");
-  mainEl.className = "card-main";
-
-  const titleEl = document.createElement("div");
-  titleEl.className = "card-title";
-  titleEl.textContent = card.title;
-
-  const ul = document.createElement("ul");
-  ul.className = "card-lines";
-  ul.style.fontSize = fontSize;
-
-  (card.lines || []).forEach((line) => {
-    const li = document.createElement("li");
-    li.textContent = line;
-    ul.appendChild(li);
-  });
-
-  mainEl.appendChild(titleEl);
-  mainEl.appendChild(ul);
-
-  // FOOTER NAV
+  // FOOTER NAV (centered navigation buttons only)
   const footerEl = document.createElement("div");
   footerEl.className = "card-footer";
 
@@ -402,7 +367,7 @@ function renderCard() {
   if (card.parent) {
     const backParentBtn = document.createElement("button");
     backParentBtn.className = "nav-btn";
-    backParentBtn.textContent = "← Parent";
+    backParentBtn.textContent = "Up";
     backParentBtn.onclick = () => {
       currentId = card.parent;
       renderCard();
@@ -413,7 +378,7 @@ function renderCard() {
   if (card.id !== "menu") {
     const backMenuBtn = document.createElement("button");
     backMenuBtn.className = "nav-btn";
-    backMenuBtn.textContent = "⟲ Main menu";
+    backMenuBtn.textContent = "Top";
     backMenuBtn.onclick = () => {
       currentId = "menu";
       renderCard();
@@ -424,14 +389,7 @@ function renderCard() {
   footerEl.appendChild(navRowTop);
   footerEl.appendChild(navRowBottom);
 
-  // Meta info (tiny footer)
-  const meta = document.createElement("div");
-  meta.className = "meta-row";
-  meta.innerHTML = `<span>${card.id}</span><span>Modular Speaking</span>`;
-
-  cardEl.appendChild(mainEl);
   cardEl.appendChild(footerEl);
-  cardEl.appendChild(meta);
 
   app.appendChild(cardEl);
 }
